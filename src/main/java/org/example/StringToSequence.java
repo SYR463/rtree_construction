@@ -57,7 +57,7 @@ public class StringToSequence {
             }
         }
 
-        // 假设最大容量为 4，检查是否需要添加占位符
+        // 假设最大容量为 8，检查是否需要添加占位符
         int maxCapacity = 8;
         int actualEntries = (int) sequence.stream().filter(s -> s.equals("⟨L⟩")).count();
         if (actualEntries < maxCapacity) {
