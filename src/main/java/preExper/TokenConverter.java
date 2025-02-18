@@ -33,7 +33,7 @@ public class TokenConverter {
             String token1 = mapXToLetter(x1) + (int) y1;
             String token2 = mapXToLetter(x2) + (int) y2;
 
-            return token1 + " " + token2;  // 返回token，如 "A4 E26"
+            return token1 + token2;  // 返回token，如 "A4E26"
         }
 
         return null;
@@ -62,9 +62,9 @@ public class TokenConverter {
 
             // 处理mbr和entry节点
             if (line.startsWith("mbr")) {
-                result.append(indent).append("<NL> ");  // mbr节点用<NL>表示
+                result.append(indent).append("<NL>");  // mbr节点用<NL>表示
             } else if (line.startsWith("entry")) {
-                result.append(indent).append("<L> ");  // entry节点用<L>表示
+                result.append(indent).append("<L>");  // entry节点用<L>表示
             }
 
             // 提取坐标部分并生成对应的token
