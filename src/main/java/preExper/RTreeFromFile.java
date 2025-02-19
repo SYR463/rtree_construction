@@ -36,10 +36,13 @@ import java.util.stream.Collectors;
 public class RTreeFromFile {
     public static void main(String[] args) {
         // 输入文件夹路径（批量读取CSV文件）
-//        String inputFolder = "D:\\project\\Java\\rtree_construct\\processedData\\";
-//        String outputFolder = "D:\\project\\Java\\rtree_construct\\outputRTree\\";  // 输出R*-tree的结构
-        String inputFolder = "preExperData/generateData";
-        String outputFolder = "preExperData/RTreeString";  // 输出R*-tree的结构
+        String inputFolder = "preExperData/generateData/";
+        String outputFolder = "preExperData/RTreeString/";  // 输出R*-tree的结构
+
+//        // 用于构建两个相同的 R_tree 结构，并用于 Index2Vec 部分的预实验，验证所提出方法的可行性与有效性
+//        String inputFolder = "preExperData/testDataset/generateData/";
+//        String outputFolder = "preExperData/testDataset/RTreeString/";  // 输出R*-tree的结构
+
 
         // 创建输出文件夹，如果不存在
         File outputDir = new File(outputFolder);
@@ -58,7 +61,7 @@ public class RTreeFromFile {
             System.out.println("处理文件: " + csvFile.getName());
 
             // 创建 R*-tree
-            RTree<String, Rectangle> tree = RTree.minChildren(1).maxChildren(3).splitter(splitterRStar).create();
+            RTree<String, Rectangle> tree = RTree.minChildren(2).maxChildren(3).splitter(splitterRStar).create();
 
             // 读取 CSV 文件并批量插入
             List<String[]> dataList = new ArrayList<>();
@@ -83,8 +86,8 @@ public class RTreeFromFile {
 
             // **按照 Grid_X 和 Grid_Y 排序，以车辆的移动方向为基准，按照从左到右的方式遍历**
             dataList = dataList.stream()
-                    .sorted(Comparator.comparingInt((String[] row) -> Integer.parseInt(row[3])) // 按 Grid_Y 排序
-                            .thenComparingInt(row -> Integer.parseInt(row[2]))) // Grid_Y 相同时按 Grid_X 排序
+                    .sorted(Comparator.comparingInt((String[] row) -> Integer.parseInt(row[3])).reversed() // 按 Grid_Y 从大到小排序
+                            .thenComparingInt(row -> Integer.parseInt(row[2]))) // Grid_Y 相同时按 Grid_X 从小到大排序
                     .collect(Collectors.toList());
 
             // **按排序后的数据插入 R-tree**

@@ -130,10 +130,12 @@ public class TokenConverter {
     public static void main(String[] args) {
         try {
             // 传入文件夹路径，处理该文件夹中的所有 .txt 文件
-            String inputFolder = "preExperData/RTreeString";
-            String outputFolder = "preExperData/RTreeToken";
-//            String inputFolder = "D:\\project\\Java\\rtree_construct\\outputRTree\\";
-//            String outputFolder = "D:\\project\\Java\\rtree_construct\\outputRTree1\\";
+            String inputFolder = "preExperData/RTreeString/";
+            String outputFolder = "preExperData/RTreeToken/";
+
+//            // 用于构建两个相同的 R_tree 结构，并用于 Index2Vec 部分的预实验，验证所提出方法的可行性与有效性
+//            String inputFolder = "preExperData/testDataset/RTreeString/";
+//            String outputFolder = "preExperData/testDataset/RTreeToken/";  // 输出R*-tree的结构
 
             processFilesInDirectory(inputFolder, outputFolder);
         } catch (IOException e) {
