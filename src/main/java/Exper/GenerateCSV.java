@@ -1,4 +1,4 @@
-package preExper;
+package Exper;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,19 +8,23 @@ import java.util.Random;
 public class GenerateCSV {
     public static void main(String[] args) {
         // 生成 10000 个Global_Time
-        long[] globalTimes = new long[10000];
-        for (int i = 0; i < 10000; i++) {
-            globalTimes[i] = 1118846982100L + i * 100;  // 假设每个Global_Time相差100
+        int time_num = 10000;
+        long[] globalTimes = new long[time_num];
+        for (int i = 0; i < time_num; i++) {
+//            globalTimes[i] = 1118846982100L + i * 100;  // 假设每个Global_Time相差100
+            globalTimes[i] = 1118856982100L + i * 100;  // 假设每个Global_Time相差100
         }
 
-        // 叶节点数量
-        int vehicleNum = 5;
+
         // M*N 网格边界
-        int M = 4;
-        int N = 5;
+        int M = 5;
+        int N = 150;
+
+        // 叶节点数量
+        int vehicleNum = new Random().nextInt(M*N);
 
         // 指定保存CSV文件的文件夹路径
-        String folderPath = "preExperData/generateData/";
+        String folderPath = "ExperData/01_generateData/";
 
         // 创建文件夹（如果不存在）
         File folder = new File(folderPath);
@@ -48,7 +52,7 @@ public class GenerateCSV {
 
 
                 // 每个Global_Time生成多个车辆记录
-                for (int vehicleId = 1; vehicleId <= vehicleNum; vehicleId++) {  // 假设每个时间戳下有6辆车
+                for (int vehicleId = 1; vehicleId <= vehicleNum; vehicleId++) {
                     // 确保Grid_X, Grid_Y唯一且不重复
                     int gridX, gridY;
 
